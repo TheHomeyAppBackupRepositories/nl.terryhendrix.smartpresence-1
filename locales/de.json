@@ -1,0 +1,17 @@
+{
+  "settings": {
+    "title": "Smart Presence"
+  },
+  "pair": {
+    "configuration" : {
+      "name": "Name:",
+      "ip_address" : "IP-Adresse:",
+      "is_kid" : "Ist Kind:",
+      "is_guest" : "Ist Gast:",
+      "add_device_btn": "Gerät hinzufügen",
+      "invalid_device_name": "Fehlender Gerätename",
+      "missing_ip_address": "Fehlende IP-Adresse",
+      "invalid_ip_address": "Ungültige IP-Adresse"
+    }
+  }
+}
