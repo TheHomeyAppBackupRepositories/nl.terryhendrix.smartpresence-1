@@ -1,7 +1,7 @@
 {
   "_comment": "This file is generated. Please edit .homeycompose/app.json instead.",
   "id": "nl.terryhendrix.smartpresence",
-  "version": "0.8.2",
+  "version": "0.8.4",
   "compatibility": ">=5.0.0",
   "sdk": 3,
   "brandColor": "#2a6fe8",
@@ -123,11 +123,7 @@
       }
     }
   },
-  "bugs": {
-    "url": "https://github.com/balmli/homey-smartpresence/issues"
-  },
   "homeyCommunityTopicId": 33794,
-  "source": "https://github.com/balmli/homey-smartpresence",
   "flow": {
     "triggers": [
       {
@@ -143,6 +139,7 @@
         "tokens": [
           {
             "name": "who",
+            "type": "string",
             "title": {
               "en": "Who",
               "nl": "Wie",
@@ -175,6 +172,7 @@
         "tokens": [
           {
             "name": "who",
+            "type": "string",
             "title": {
               "en": "Who",
               "nl": "Wie",
@@ -207,6 +205,7 @@
         "tokens": [
           {
             "name": "who",
+            "type": "string",
             "title": {
               "en": "Who",
               "nl": "Wie",
@@ -239,6 +238,7 @@
         "tokens": [
           {
             "name": "who",
+            "type": "string",
             "title": {
               "en": "Who",
               "nl": "Wie",
@@ -271,6 +271,7 @@
         "tokens": [
           {
             "name": "who",
+            "type": "string",
             "title": {
               "en": "Who",
               "nl": "Wie",
@@ -303,6 +304,7 @@
         "tokens": [
           {
             "name": "who",
+            "type": "string",
             "title": {
               "en": "Who",
               "nl": "Wie",
@@ -335,6 +337,7 @@
         "tokens": [
           {
             "name": "who",
+            "type": "string",
             "title": {
               "en": "Who",
               "nl": "Wie",
@@ -367,6 +370,7 @@
         "tokens": [
           {
             "name": "who",
+            "type": "string",
             "title": {
               "en": "Who",
               "nl": "Wie",
@@ -399,6 +403,7 @@
         "tokens": [
           {
             "name": "who",
+            "type": "string",
             "title": {
               "en": "Who",
               "nl": "Wie",
@@ -431,6 +436,7 @@
         "tokens": [
           {
             "name": "who",
+            "type": "string",
             "title": {
               "en": "Who",
               "nl": "Wie",
@@ -463,6 +469,7 @@
         "tokens": [
           {
             "name": "who",
+            "type": "string",
             "title": {
               "en": "Who",
               "nl": "Wie",
@@ -495,6 +502,7 @@
         "tokens": [
           {
             "name": "who",
+            "type": "string",
             "title": {
               "en": "Who",
               "nl": "Wie",
@@ -527,6 +535,7 @@
         "tokens": [
           {
             "name": "who",
+            "type": "string",
             "title": {
               "en": "Who",
               "nl": "Wie",
@@ -559,6 +568,7 @@
         "tokens": [
           {
             "name": "who",
+            "type": "string",
             "title": {
               "en": "Who",
               "nl": "Wie",
@@ -591,6 +601,7 @@
         "tokens": [
           {
             "name": "who",
+            "type": "string",
             "title": {
               "en": "Who",
               "nl": "Wie",
@@ -623,6 +634,7 @@
         "tokens": [
           {
             "name": "who",
+            "type": "string",
             "title": {
               "en": "Who",
               "nl": "Wie",
@@ -655,6 +667,7 @@
         "tokens": [
           {
             "name": "who",
+            "type": "string",
             "title": {
               "en": "Who",
               "nl": "Wie",
@@ -694,6 +707,7 @@
         "tokens": [
           {
             "name": "who",
+            "type": "string",
             "title": {
               "en": "Who",
               "nl": "Wie",
