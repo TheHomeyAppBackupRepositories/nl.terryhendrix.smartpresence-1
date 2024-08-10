@@ -2,6 +2,13 @@
 
 const Homey = require('homey');
 const net = require('net');
+const moment = require('moment-timezone');
+
+function formatLastSeen(timestamp, homey) {
+  // Use homey.clock.getTimezone() to get the user's timezone
+  const userTimezone = homey.clock.getTimezone();
+  return moment(timestamp).tz(userTimezone).format('DD/MM HH:mm:ss');
+}
 
 module.exports = class SmartPresenceDevice extends Homey.Device {
 
@@ -10,6 +17,12 @@ module.exports = class SmartPresenceDevice extends Homey.Device {
     await this._migrate();
     this._present = this.getCapabilityValue('presence');
     this._lastSeen = this.getStoreValue('lastSeen') || 0;
+
+    // Check and add the lastseen capability dynamically
+    if (!this.hasCapability('lastseen')) {
+      await this.addCapability('lastseen');
+    }
+
     this.scan();
   }
 
@@ -103,10 +116,22 @@ module.exports = class SmartPresenceDevice extends Homey.Device {
   }
 
   async updateLastSeen() {
-    this._lastSeen = Date.now();
-    if (!this._lastSeenStored || this._lastSeen - this._lastSeenStored > 60000) {
-      await this.setStoreValue('lastSeen', this._lastSeen);
-      this._lastSeenStored = this._lastSeen;
+    const now = Date.now();
+
+    // Update the last seen time in store if more than 60 seconds have passed since the last update
+    if (!this._lastSeen || now - this._lastSeen > 60000) {
+      try {
+        // Format the timestamp after updating it
+        const lastSeenFormatted = formatLastSeen(now, this.homey);
+        // Update the 'lastseen' capability with the formatted timestamp
+        await this.setCapabilityValue('lastseen', lastSeenFormatted).catch(this.error); // Update lastseen capability
+        this._lastSeen = now;
+        // Store the raw timestamp in the store
+        await this.setStoreValue('lastSeen', now);
+        //this.log('Updated last seen:', lastSeenFormatted);
+      } catch (err) {
+        this.log('Error updating last seen:', err.message);
+      }
     }
   }
 
@@ -202,7 +227,7 @@ module.exports = class SmartPresenceDevice extends Homey.Device {
     const tokens = this.getFlowCardTokens();
 
     if (present) {
-      this.updateLastSeen();
+      await this.updateLastSeen(); // Update last seen time when presence is detected
     }
 
     if (present && !currentPresent) {
@@ -224,7 +249,7 @@ module.exports = class SmartPresenceDevice extends Homey.Device {
       if (!this.shouldDelayAwayStateSwitch()) {
         this.log(`${this.getHost()} - ${this.getName()}: is marked as offline`);
         await this.setPresenceStatus(present);
-        await this.homey.app.deviceLeft(this);
+        await this.homey.app.deviceLeft(this, tokens);
         await this.homey.app.userLeftTrigger.trigger(this, tokens, {}).catch(this.error);
         await this.homey.app.someoneLeftTrigger.trigger(tokens, {}).catch(this.error);
         if (this.isHouseHoldMember()) {
